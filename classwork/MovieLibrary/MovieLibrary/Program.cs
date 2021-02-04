@@ -15,16 +15,30 @@ namespace MovieLibrary
             do
             {
                 char option = DisplayMainMenu();
+                //switch statement is equivalent to a series pf if-else-if with equlity checks
+                // switch-statement :: =switch(E){case statement*[default]};
+                //case statement ::=case E : S ;
+                //default-statement ::= default :S;
+                //if (option == 'A')
+                //  AddMovie();
+                // else if (option == 'V')
+                //   ViewMovie();
+                //else if (option == 'Q')
+                //  done = true;
+                // else
+                //   DisplayError("Unknown command");
+                switch (option)
+                {
+                    case 'A':AddMovie(); break;
 
-                if (option == 'A')
-                    AddMovie();
-                else if (option == 'V')
-                    ViewMovie();
-                else if (option == 'Q')
-                    done = true;
-                else
-                    DisplayError("Unknown command");
+                    case 'V': ViewMovie();
+                    break;
 
+                    case 'Q': done =true;
+                    break;
+
+                    default: DisplayError("Unknown Command"); break;
+                };
             } while (!done);
         }
 
@@ -49,13 +63,24 @@ namespace MovieLibrary
                 string input = Console.ReadLine();  // string ReadLine ()                        
 
                 //TODO: Validate input
-                if (input == "A" || input == "a")
-                    return 'A';
-                else if (input == "Q" || input == "q")
-                    return 'Q';
-                else if (input == "V" || input == "v")
-                    return 'V';
+                //if (input == "A" || input == "a")
+                //   return 'A';
+                //else if (input == "Q" || input == "q")
+                //    return 'Q';
+                // else if (input == "V" || input == "v")
+                //    return 'V';
+                switch (option)
+                {
+                    case "A":
+                    case "a": return "A"; 
+                    case "Q": 
+                    case "q": return "Q";
+                    case "V":
+                    case "v": return "V";
+                    
 
+                    default: DisplayError("Unknown Command"); break;
+                };
                 DisplayError("Invalid option");
             } while (true);
         }
@@ -95,11 +120,16 @@ namespace MovieLibrary
         static void ViewMovie ()
         {
             //TODO: Format
-            Console.WriteLine(title);
+            Console.WriteLine($"{title} ({releaseYear} minutes");
+            if (runLength >0)
+                Console.WriteLine($"Running Time:{runLength} mintutes");
+            if (!String.IsNullOrEmpty(rating))
+                Console.WriteLine($"MPAA Rating: {rating}");
+            Console.WriteLine($"Classic?")
+
             Console.WriteLine(description);
-            Console.WriteLine(releaseYear);
-            Console.WriteLine(runLength);
-            Console.WriteLine(rating);
+           
+           
             Console.WriteLine(isClassic);
         }
 
@@ -145,8 +175,10 @@ namespace MovieLibrary
 
             do
             {
+                //type inferencing- complier infers type based upo the assignment
                 //Keep prompting until valid value
-                string input = Console.ReadLine();
+                //string input = Console.ReadLine();
+                var input = Console.ReadLine();
 
                 //Fix so it doesn't crash if not integer, use TryParse instead
                 //Convert string to int
@@ -166,7 +198,7 @@ namespace MovieLibrary
                 //    Sf;
                 //int result;
                 //if (Int32.TryParse(input, out result))                
-                if (Int32.TryParse(input, out int result))  //Inline variable declaration
+                if (Int32.TryParse(input, out var result))  //Inline variable declaration
                 {
                     //Make sure it is at least minValue
                     if (result >= minimumValue)
@@ -184,7 +216,74 @@ namespace MovieLibrary
         }
 
         #region Demo Code
+        void DemoString()
+        {
+            //conversion to string E.ToString
+            //Comsole.WriteLine(10); => Console.WriteLine(10.ToString());
+            int hours = 10;
+            string hourString = hours.ToString();
+            hourString= 10.ToString();
+            //String Literals ""
+            //escape sequence -/? inside a string literal, have special meaning to the compiler,generally produce a single character
+            // \n-newline
+            // \t-horizontal tab
+            // \\-slash 
+            // \" -double qute
+            // \' single in character
+            // \x## - hex code equivalent
+            string stringLiteral = "Hello" + "World";
+            stringLiteral ="hello\nWorld";
 
+            //  Verbatim syntax - escape sequence ignored 
+            string filePath = "C:\\Temp\\test.txt";
+            string filePath2 = @"C:\Temp\test.txt";
+
+            //empty string 
+            //null and empty string are not the same
+            string emptyString = "";
+            string defaultString; //false
+            //checking for empty
+            bool isEmpty = emptyString =="";
+            bool isEmpy2 = emptyString == ""||emptyString==null; ;// If empty or null
+            bool isEmptyPreferred = String.IsNullOrEmpty(emptyString);//handles both
+           
+            //String concatenation
+            string first = "Hello", second = "World";
+
+            //start with 3 strings
+            string concatOP=first +" "+ second;
+            string concatfunction = String.Concat(first, " ", second);
+            string joinfunction = String.Join(' ', first, second);
+            
+            //strings are immutable!!!!
+            //10 +2 =12
+            string imutableString = "Hello";
+            imutableString += " "; //two strings: "Hello" , "Hello"
+            imutableString += "World"; //three strings "Hello" , "Hello" , "Hello WOrld"
+
+            //string formatting
+            // The result of 4 + 5 = 9
+            int x = 4, y = 5;
+            int result = x+y;
+            
+            //1)
+            string format1 = "The result of " + x + " + "  + y + " = " + (x+y);
+
+            //2)
+            string format2 = String.Format("The of {0} + {1} = {2}", x, y, (x+y));
+            //Many message-like function have overloads that have a string and arguments and call string.Format automatically
+            Console.WriteLine(format2);
+            Console.WriteLine("The of {0} + {1} = {2}", x, y, (x+y));
+
+            //3)String interpolation - let the compiler do it 
+            //only works with string literals
+            string format3 = $"The result of {x} + {y} = {x+y}";
+
+            string formattedValue = x.ToString("00");
+            decimal price = 8500;
+            string priceString = price.ToString("C"); //$8,500.00
+
+        }
         void DemoExpressions ()
         {
             //Arithmetic (op1 op op2)
