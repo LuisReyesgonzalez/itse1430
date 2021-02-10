@@ -5,7 +5,7 @@
  */
 using System;
 
-namespace MovieLibrary
+namespace MovieLibrary.ConsoleHost
 {
     class Program
     {
@@ -69,14 +69,14 @@ namespace MovieLibrary
                 //    return 'Q';
                 // else if (input == "V" || input == "v")
                 //    return 'V';
-                switch (option)
+                switch (input)
                 {
                     case "A":
-                    case "a": return "A"; 
+                    case "a": return 'A'; 
                     case "Q": 
-                    case "q": return "Q";
+                    case "q": return 'Q';
                     case "V":
-                    case "v": return "V";
+                    case "v": return 'V';
                     
 
                     default: DisplayError("Unknown Command"); break;
@@ -120,17 +120,16 @@ namespace MovieLibrary
         static void ViewMovie ()
         {
             //TODO: Format
-            Console.WriteLine($"{title} ({releaseYear} minutes");
-            if (runLength >0)
-                Console.WriteLine($"Running Time:{runLength} mintutes");
+            Console.WriteLine($"{title} ({releaseYear})");
+            if (runLength > 0)
+                Console.WriteLine($"Running Time: {runLength} minutes");
             if (!String.IsNullOrEmpty(rating))
                 Console.WriteLine($"MPAA Rating: {rating}");
-            Console.WriteLine($"Classic?")
 
-            Console.WriteLine(description);
-           
-           
-            Console.WriteLine(isClassic);
+            Console.WriteLine($"Classic? {(isClassic ? 'Y' : 'N')}");
+
+            if (!String.IsNullOrEmpty(description))
+                Console.WriteLine(description);  
         }
 
         // Reads a boolean value from the console.
@@ -143,9 +142,24 @@ namespace MovieLibrary
 
                 //TODO: Case does not matter
                 // input == "Y" || "y" -: Not correct
-                if (input == "Y" || input == "y")
+                //Comparison 1
+               // if (input == "Y" || input == "y")
+                 //   return true;
+                //else if (input == "N" || input == "n")
+                  //  return false;
+                
+                //Should use switch but will play around with comparison
+                // Not really recommended...
+                // Comparison 2
+                //if (input.ToUpper() == "Y")
+                //    return true;
+                //else if (input.ToLower() == "n")
+                //    return false;
+
+                // Comparison 3
+                if (String.Compare(input, "Y", true) == 0)
                     return true;
-                else if (input == "N" || input == "n")
+                else if (String.Compare(input, "N", true) == 0)
                     return false;
 
                 DisplayError("Please enter either Y or N");
@@ -282,6 +296,22 @@ namespace MovieLibrary
             string formattedValue = x.ToString("00");
             decimal price = 8500;
             string priceString = price.ToString("C"); //$8,500.00
+            // Common string functions 
+            // String.<function>
+            //<string>.<funtion>
+            int len = priceString.Length; //Length, in chars, of the strings
+            //Casing
+            var name = "Bob";
+            string upperName = name.ToUpper();
+            string lowerName = name.ToUpper();
+            //2)
+            var areEqualStrings1=name.CompareTo("bob")==0;
+            //3)
+           var areEqualStrings2= String.Compare(name, "bob",true)==0;
+              var areEqualStrings3= String.Compare(name, "bob",StringComparison.CurrentCultureIgnoreCase)==0;//Case insensitive
+            //Padding / Trimming
+            //<string>.Trim() => string with a;; whitespace removed from front and back
+            //<string>.TrimStart() / TrimEnd() => only from front and back
 
         }
         void DemoExpressions ()
