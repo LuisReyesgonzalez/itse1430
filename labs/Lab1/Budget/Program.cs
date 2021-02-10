@@ -10,9 +10,12 @@ namespace Budget
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Budget");
+            Console.WriteLine("ITSE 1430");
+            Console.WriteLine("Spring 2021");
+            Console.WriteLine("Luis Reyes");
         }
     }
 }
