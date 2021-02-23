@@ -111,26 +111,40 @@ namespace MovieLibrary.ConsoleHost
 
             // title, release year, run length (min), description, rating
             Console.Write("Enter a title: ");
-            movie.title = Console.ReadLine();
+            movie.Title = Console.ReadLine();
 
             Console.Write("Enter an optional description: ");
-            movie.description = Console.ReadLine();
+            movie.Description = Console.ReadLine();
 
             Console.Write("Enter a release year: ");
-            movie.releaseYear = ReadInt32(1900);
+            movie.ReleaseYear = ReadInt32(1900);
 
             Console.Write("Enter the run length in minutes: ");
-            movie.runLength = ReadInt32(0);
+            movie.RunLength = ReadInt32(0);
 
             Console.Write("Enter the rating: ");
-           movie.rating = Console.ReadLine();
+           movie.Rating = Console.ReadLine();
 
             Console.Write("Is a Classic (Y/N)? ");
-           movie.isClassic = ReadBoolean();
+           movie.IsClassic = ReadBoolean();
+
+            //Validate movie
+            if (!movie.Validate(out var message))
+            {
+                DisplayError("Movie is not valid");
+                return;
+            };
             //Hiding field movie 
             //this.movie =movie;
             _movie=movie;
+            var movie2 = new Movie();
+            movie2.Title ="Jaws 2";
+            movie2.ReleaseYear=1930;
 
+            movie2.IsBlackAndWhite();
+            movie.IsBlackAndWhite();
+            //movie.DoComplex(1970, true);
+            var age = movie.AgeInYears;
             ViewMovie();
         }
 
@@ -140,16 +154,16 @@ namespace MovieLibrary.ConsoleHost
         static void ViewMovie ()
         {
             //TODO: Format
-            Console.WriteLine($"{_movie.title} ({_movie.releaseYear})");
-            if (_movie.runLength > 0)
-                Console.WriteLine($"Running Time: {_movie.runLength} minutes");
-            if (!String.IsNullOrEmpty(_movie.rating))
-                Console.WriteLine($"MPAA Rating: {_movie.rating}");
+            Console.WriteLine($"{_movie.Title} ({_movie.ReleaseYear})");
+            if (_movie.RunLength > 0)
+                Console.WriteLine($"Running Time: {_movie.RunLength} minutes");
+            if (!String.IsNullOrEmpty(_movie.Rating))
+                Console.WriteLine($"MPAA Rating: {_movie.Rating}");
 
-            Console.WriteLine($"Classic? {(_movie.isClassic ? 'Y' : 'N')}");
+            Console.WriteLine($"Classic? {(_movie.IsClassic ? 'Y' : 'N')}");
 
-            if (!String.IsNullOrEmpty(_movie.description))
-                Console.WriteLine(_movie.description);  
+            if (!String.IsNullOrEmpty(_movie.Description))
+                Console.WriteLine(_movie.Description);  
         }
 
         // Reads a boolean value from the console.
