@@ -101,10 +101,21 @@ namespace MovieLibrary.ConsoleHost
         // Get movie from user
         static void AddMovie ()
         {
+            //Object creation
+            //  1.allocates memory to store class fields 
+            //  2.All fields are initialized to default or field initializer
+            //  3.Calls constructor will ever be called
+            //  Only 12 constructor will ever be called
+
+
+
             //new T();
             //Movie* movie =new Movie();//C++
 
             Movie movie = new Movie();
+            movie = new Movie("Default Title");
+            movie =new Movie();
+
             //Member access operator
             //member-access ::=E . Member
             
@@ -117,7 +128,7 @@ namespace MovieLibrary.ConsoleHost
             movie.Description = Console.ReadLine();
 
             Console.Write("Enter a release year: ");
-            movie.ReleaseYear = ReadInt32(1900);
+            movie.ReleaseYear = ReadInt32(Movie.MinimumReleaseYear);
 
             Console.Write("Enter the run length in minutes: ");
             movie.RunLength = ReadInt32(0);
@@ -520,5 +531,48 @@ namespace MovieLibrary.ConsoleHost
         //Data to collect - title, genre, release year, actors, runtime, director, rating
         // title, release year, run length (min), description, rating
         #endregion
+
+
+        static void DemoTypeChecking ()
+        {
+            // Type checking - programmer determining type of an expression
+            // Type casting - programmer tells compiler type of expression 
+            // type coercion - compiler dtermine type of expression
+            double payRate = 7.5;
+            int pay;
+            //Type checking
+            //1.C style cast ::= (T)E
+            // Crashes if invalid
+            // Always compiler verified (int)"Hello"
+            pay = (int)payRate;
+            //2. as operator ::= ED as T
+            //      Converts an expression to the given type , if valid , or null otherwise
+            object m= null;
+            Program p;
+            //p = (Program)m;
+            p =m as Program; //At euntimes if m is compatible with Program,  returns a as a Program else returns null
+            if (p != null)
+            {
+
+            };
+
+            //3. is operator ::= E is T => bool
+            //  type checking, not type casting
+            // works with all types
+            if(m is Program)
+            {
+                p= (Program)m;
+            };
+
+            //preferred approach
+            //4.pattern matching operator ::= E is T id
+            //      bool Try (out var result)
+            if(m is Program prog)
+            {
+                //prog is program
+            };
+        }
+
+
     }
 }

@@ -20,7 +20,7 @@ namespace MovieLibrary
     //internal(default for types): only usable in defining assembly
 
     //class-delcaration::= [modifiers] class identifier {class-members*}
-    // class-members ::== field | method | property
+    // class-members ::== field | method | property | ctor
     // field ::= [modifiers] T identifier [ = E];
     //method ::= [modifiers] (T|void) identifer ([parameters]) {S*}
     // modifers ::= [public | internal]
@@ -31,6 +31,25 @@ namespace MovieLibrary
     /// </remarks>
     public class Movie
     {
+        //Constructors- Create an instance of the type
+        // Bear minimal to create an instance
+        // Method declaration with no return type and name is always the type name
+        // Use a constructor ONLy when field initializers will not work
+        //  1. Non-primitive field that requires complex initialization
+        //  2. One field relies ob tge value of another field
+        //  3.(Deprecated) allow createing and setting the most common properties 
+        //  4. Allow setting of properties that are not writable
+        public Movie()// defualt construction
+        {
+            //Initialize the fields that cannot be initialized using the field initializer syntax
+            _description = _title;
+        }
+        //Allows you to create the instance and set a common property all at once
+        public Movie (string title)
+        {
+            _title=title;
+        }
+
         //Method - provide functionality to a class (functions)
         //Methods are verbs representing action
         //Methods are always Pascal cased
@@ -107,18 +126,31 @@ namespace MovieLibrary
         }
        
         // properties - expose data using methods (simple field syntax to call a complex method
+      
+        //Null handling
+        //null cialescing operator ::= E ?? E
+        //  Find first non-null value
+        // equivalent to (E1 != null) ? E1:E2
+        //left associative k, can be combined (E1?? E2?? E3)
+        // can still return null
+        //null condition ::= e ? member 
+        // Evaluates expression and if instance is not null , invokes member, or skips if it is 
+
+        
         public string Title
         {
             //getter - string Title()
             get // string get_Title()
             {
-                return( _title != null) ? _title : "";
+                //Return title if not null or empty string otherwise
+                return _title ??  ""; // return (_title != null) ? _title : "";
 
             }
             //setter - void identifier ( T value )
             set   // void set_Title ( string value )
             {
-                _title =value;
+                _title =(value!=null)?value.Trim() : null;
+
             }
         }
 
@@ -132,27 +164,36 @@ namespace MovieLibrary
         private string _title="";
         public string Description
         {
-            get { return (_description != null) ? _description : ""; }
+            //get { return (_description != null) ? _description : ""; }
+            get { return _description ?? ""; }
             set { _description = value; }
         }
     
         private string _description ="" ;
 
-        public int ReleaseYear
-        {
-            get { return _releaseYear; }
-            set { _releaseYear = value; }
-        }
-        private int _releaseYear=1900;
+        // public int ReleaseYear
+        // {
+        //     get { return _releaseYear; }
+        //     set { _releaseYear = value; }
+        // }
+        // private int _releaseYear=1900;
 
-        public int RunLength
-        {
-            get { return _runLength; }
-            set { _runLength = value; }
-        }
-        private int _runLength;
+        public int ReleaseYear{get;set;}
+
+        //public int RunLength // full property syntax
+        //{
+        //    get { return _runLength; }
+        //    set { _runLength = value; }
+        //}
+        //private int _runLength;
+
+        //auto property syntax- compiler will auto generate the full property
+        public int RunLength { get; set; } = MinimumReleaseYear;//= 1900;
+       
+        /// <summary>Gets or sets the rating</summary>
         public string Rating
         {
+            //get { return (_rating != null) ? _rating : ""; }
             get { return (_rating != null) ? _rating : ""; }
             set { _rating = value; }
         }
@@ -165,9 +206,27 @@ namespace MovieLibrary
             set { _isClassic = value; }
         }
         private bool _isClassic;
-        
-        
-       
-        private string _note;
+
+        //auto properties can be getter or setter only if needed
+        public int Age { get; }//=10;
+        //private readonly int_age;
+
+
+        public int RestrictedProperty
+        {
+            get;
+            private set;
+
+        }
+
+        internal int InternalProperty{ get; private set; }
+
+        //Allowed to expose a field if const or const
+       //const-glorified,name literal; value baked in to usage at compile time (primitive and value will neever chage)
+        //readonly-const named variable; value refenced at runtime
+        public const int MinimumReleaseYear = 1900;
+        public readonly DateTime MinimumReleaseDate = new DateTime(1900, 1, 1);
+
+        //private string _note;
     }
 }
