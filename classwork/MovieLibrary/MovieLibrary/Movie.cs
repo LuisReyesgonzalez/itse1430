@@ -124,9 +124,36 @@ namespace MovieLibrary
             error = "";
             return true;
         }
-       
+
+
+
+        // Properties vs Methods
+        //
+        // Use a property if:        
+        //     Must be fast to get or set 
+        //  Must be deterministic (known value) - DateTime.Now (wrong, non-deterministic
+
+        // Use a method if:
+        //   Functionality that does not set or return data (e.g. Draw)
+        //    Implementation requires slow resources such as network, file system, etc
+        //    Non-deterministic calls
+        //     Has a side effect (e.g. x++, ++x): exception - caching
+
+
+
+
+
+
+
         // properties - expose data using methods (simple field syntax to call a complex method
-      
+        // Properties - expose data using methods (simple field syntax to call a complex method)
+        //   Syntax starts out as a field but curly braces (no parens) like a method
+        //  Use cases:
+        //    1) Expose a backing field
+        //    2) Calculated property - does not store data, just calculates it
+        //  Golden rules:
+        //    1) String and array properties never return null
+
         //Null handling
         //null cialescing operator ::= E ?? E
         //  Find first non-null value
@@ -136,7 +163,7 @@ namespace MovieLibrary
         //null condition ::= e ? member 
         // Evaluates expression and if instance is not null , invokes member, or skips if it is 
 
-        
+
         public string Title
         {
             //getter - string Title()
@@ -149,7 +176,7 @@ namespace MovieLibrary
             //setter - void identifier ( T value )
             set   // void set_Title ( string value )
             {
-                _title =(value!=null)?value.Trim() : null;
+                _title = value?.Trim() ?? "";
 
             }
         }

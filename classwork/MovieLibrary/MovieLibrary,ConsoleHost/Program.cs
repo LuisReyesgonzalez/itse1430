@@ -17,6 +17,7 @@ namespace MovieLibrary.ConsoleHost
     
     class Program
     {
+
         static void Main ()  //(string[] args)
         {
             //System.Collectuons.Arraylist
@@ -105,7 +106,7 @@ namespace MovieLibrary.ConsoleHost
             //  1.allocates memory to store class fields 
             //  2.All fields are initialized to default or field initializer
             //  3.Calls constructor will ever be called
-            //  Only 12 constructor will ever be called
+            //  Only 1 constructor will ever be called
 
 
 
@@ -131,7 +132,8 @@ namespace MovieLibrary.ConsoleHost
             movie.ReleaseYear = ReadInt32(Movie.MinimumReleaseYear);
 
             Console.Write("Enter the run length in minutes: ");
-            movie.RunLength = ReadInt32(0);
+            movie.RunLength = ReadInt32(-1);
+            //Console.WriteLine(movie.RunLength);
 
             Console.Write("Enter the rating: ");
            movie.Rating = Console.ReadLine();
