@@ -18,7 +18,7 @@ namespace CharacterCreator.ConsoleHost
                 char option = DisplayMainMenu();
                 switch (option)
                 {
-                    case 'A': 
+                    case 'A':
                     break;
                     case 'V':
                     break;
@@ -55,49 +55,55 @@ namespace CharacterCreator.ConsoleHost
                 DisplayError("Invalid option");
             } while (true);
         }
-     
-       static void AddCharacter ()
+
+        static void AddCharacter ()
         {
             Character character = new Character();
-            Console.Write("Enter Character Name: ");
-            character.Name = Console.ReadLine();
-
-
-            Console.Write("Enter an optional description: ");
-            character.Description = Console.ReadLine();
-
-            if (!character.Validate(out var message))
+            do
             {
-                DisplayError("Character is not valid");
-                return;
-            };
+
+                Console.Write("Enter Character Name: ");
+                character.Name = Console.ReadLine();
+
+            } while (!character.Validate(out var error));
+
+            Console.Write("Choose your profession: ");
+            character.profession=professionOption();
+
+            Console.Write("Choose your race: ");
+            character.race=raceOption();
+
+            // Console.Write(character.profession);
+            // Console.Write("Enter an optional description: ");
+            // character.Description = Console.ReadLine();
+
+
 
         }
         /// <summary> Profession options for the user</summary>
-        static void professionOption ()
+        static string professionOption ()
         {
-            bool done = false;
+            char option = DisplayProfessionMenu();
+
             do
             {
-                char option = DisplayProfessionMenu();
+
                 switch (option)
                 {
-                    case 'F':
-                    break;
-                    case 'H':
-                    break;
+                    case 'F': return "Fighter";
+                    case 'H': return "Hunter";
                     case 'P':
-                    break;
+                    return "Priest";
+
                     case 'R':
-                    break;
+                    return "Rogue";
+
                     case 'W':
-                    break;
-                    case 'Q':
-                    done =true;
-                    break;
+                    return "Wizard";
                     default: DisplayError("Unknown Command"); break;
                 };
-            } while (!done);
+            } while (option != 'F'&& option != 'H' && option != 'P'&& option != 'R' && option!='W');
+            return "";
         }
 
         /// <summary> Display the character profession menu</summary>
@@ -110,7 +116,7 @@ namespace CharacterCreator.ConsoleHost
             Console.WriteLine("P) Priest");
             Console.WriteLine("R) Rogue");
             Console.WriteLine("W) Wizard");
-            Console.WriteLine("Q) uit");
+
             //Console input
             do
             {
@@ -118,7 +124,7 @@ namespace CharacterCreator.ConsoleHost
                 switch (input)
                 {
                     case "F":
-                    case "f": ; return 'F';
+                    case "f": return 'F';
                     case "H":
                     case "h": return 'H';
                     case "P":
@@ -127,8 +133,6 @@ namespace CharacterCreator.ConsoleHost
                     case "r": return 'R';
                     case "W":
                     case "w": return 'W';
-                    case "Q":
-                    case "q": return 'Q';
                     default: DisplayError("Unknown Command"); break;
                 };
                 DisplayError("Invalid option");
@@ -136,30 +140,22 @@ namespace CharacterCreator.ConsoleHost
         }
 
         /// <summary> Race options for the user</summary>
-        static void raceOption ()
+        static string raceOption ()
         {
-            bool done = false;
+            char option = DisplayRaceMenu();
             do
             {
-                char option = DisplayRaceMenu();
                 switch (option)
                 {
-                    case 'F':
-                    break;
-                    case 'H':
-                    break;
-                    case 'P':
-                    break;
-                    case 'R':
-                    break;
-                    case 'W':
-                    break;
-                    case 'Q':
-                    done =true;
-                    break;
+                    case 'D': return "Dwarf ";
+                    case 'E':return "Elf";
+                    case 'G':return "Gnome ";
+                    case 'T':return "Half Elf";
+                    case 'H': return "Human ";
                     default: DisplayError("Unknown Command"); break;
                 };
-            } while (!done);
+            } while (option != 'D'&& option != 'E' && option != 'G'&& option != 'T' && option!='H');
+            return "";
         }
 
         /// <summary> Display the character race menu</summary>
@@ -172,7 +168,7 @@ namespace CharacterCreator.ConsoleHost
             Console.WriteLine("G) Gnome");
             Console.WriteLine("T) Half Elf");
             Console.WriteLine("H) Human");
-            Console.WriteLine("Q) uit");
+
             //Console input
             do
             {
@@ -180,7 +176,7 @@ namespace CharacterCreator.ConsoleHost
                 switch (input)
                 {
                     case "D":
-                    case "d":; return 'D';
+                    case "d": return 'D';
                     case "E":
                     case "e": return 'E';
                     case "G":
@@ -188,12 +184,33 @@ namespace CharacterCreator.ConsoleHost
                     case "T":
                     case "t": return 'T';
                     case "H":
-                    case "h": return 'h';
-                    case "Q":
-                    case "q": return 'Q';
+                    case "h": return 'H';
                     default: DisplayError("Unknown Command"); break;
                 };
                 DisplayError("Invalid option");
+            } while (true);
+        }
+
+        static int ReadInt32 ( )
+        {
+            int minimumValue = 1;
+            int maxmumValue = 100;
+            do
+            {
+             
+                var input = Console.ReadLine();
+
+                             
+                if (Int32.TryParse(input, out var result))  //Inline variable declaration
+                {
+                    //Make sure it is at least minValue
+                    if (result >= minimumValue && result <= maxmumValue)
+                        return result;
+                    else
+                        DisplayError("Value must be between" + minimumValue + " & "+ maxmumValue);
+                  
+                } else
+                    DisplayError("Value must be numeric");
             } while (true);
         }
 
@@ -204,5 +221,5 @@ namespace CharacterCreator.ConsoleHost
         }
 
     }
-   }
+}
 
