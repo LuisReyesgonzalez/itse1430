@@ -20,25 +20,30 @@ namespace CharacterCreator.ConsoleHost
                 {
                     case 'A':
                     break;
+                    case 'D':
+                    character = null;
+                    break;
                     case 'V':
                     break;
+
                     case 'Q':
                     done =true;
                     break;
                     default: DisplayError("Unknown Command"); break;
                 };
             } while (!done);
-        }//end of main
+        }
 
         /// <summary> Display the menu</summary>
         private static char DisplayMainMenu ()
         {
-            Console.WriteLine();
+            Console.WriteLine("Welcome!");
             Console.WriteLine("-------------");
-            Console.WriteLine("A)dd a character");
-            Console.WriteLine("V)iew a character");
+            Console.WriteLine("A) Add character");
+            Console.WriteLine("V) View a character");
+            Console.WriteLine("E) Edit a character");
+            Console.WriteLine("D) Delete character");
             Console.WriteLine("Q) uit");
-            //Console input
             do
             {
                 string input = Console.ReadLine();
@@ -46,19 +51,23 @@ namespace CharacterCreator.ConsoleHost
                 {
                     case "A":
                     case "a": AddCharacter(); return 'A';
+                    case "D":
+                    case "d": return 'D';
+                    case "E":
+                    case "e": DisplayEditMenu(); return 'E';
                     case "Q":
                     case "q": return 'Q';
                     case "V":
-                    case "v": return 'V';
+                    case "v": ViewCharacter(); return 'V';
                     default: DisplayError("Unknown Command"); break;
                 };
                 DisplayError("Invalid option");
             } while (true);
         }
-
+        static Character character;
         static void AddCharacter ()
         {
-            Character character = new Character();
+            character=new Character();
             do
             {
 
@@ -73,13 +82,51 @@ namespace CharacterCreator.ConsoleHost
             Console.Write("Choose your race: ");
             character.race=raceOption();
 
-            // Console.Write(character.profession);
-            // Console.Write("Enter an optional description: ");
-            // character.Description = Console.ReadLine();
+            Console.Write("--------Attributes-------- ");
+            Console.WriteLine("");
+            Console.WriteLine("Please enter any number from 1-100 for each Attribute");
+            Console.Write("Strength: ");
+            character.Strength=ReadInt32();
 
+            Console.Write("Intelligence: ");
+            character.Intelligence=ReadInt32();
 
+            Console.Write("Agility: ");
+            character.Agility=ReadInt32();
+
+            Console.Write("Constitution: ");
+            character.Constitution=ReadInt32();
+
+            Console.Write("Charisma:");
+            character.Charisma=ReadInt32();
+
+            Console.Write("Enter an optional Biography: ");
+            character.Biography = Console.ReadLine();
 
         }
+        /// <summary>Character info displayed </summary>
+        static void ViewCharacter ()
+        {
+            if (character==null)
+            {
+                Console.WriteLine("A Character has not been created. Please create a Character. ");
+                DisplayMainMenu();
+
+            }
+            Console.WriteLine("-------Character 1--------");
+            Console.WriteLine("Name: "+character.Name);
+            Console.WriteLine("Profession: "+character.profession);
+            Console.WriteLine("Race: "+character.race);
+            Console.WriteLine("Strength: "+character.Strength);
+            Console.WriteLine("Intelligence: "+character.Intelligence);
+            Console.WriteLine("Agility: "+character.Agility);
+            Console.WriteLine("Constitution: "+ character.Constitution);
+            Console.WriteLine("Charisma: "+character.Charisma);
+            Console.WriteLine("Biography: "+character.Biography);
+            Console.WriteLine();
+
+        }
+
         /// <summary> Profession options for the user</summary>
         static string professionOption ()
         {
@@ -87,19 +134,13 @@ namespace CharacterCreator.ConsoleHost
 
             do
             {
-
                 switch (option)
                 {
                     case 'F': return "Fighter";
                     case 'H': return "Hunter";
-                    case 'P':
-                    return "Priest";
-
-                    case 'R':
-                    return "Rogue";
-
-                    case 'W':
-                    return "Wizard";
+                    case 'P': return "Priest";
+                    case 'R': return "Rogue";
+                    case 'W': return "Wizard";
                     default: DisplayError("Unknown Command"); break;
                 };
             } while (option != 'F'&& option != 'H' && option != 'P'&& option != 'R' && option!='W');
@@ -117,7 +158,6 @@ namespace CharacterCreator.ConsoleHost
             Console.WriteLine("R) Rogue");
             Console.WriteLine("W) Wizard");
 
-            //Console input
             do
             {
                 string input = Console.ReadLine();
@@ -148,9 +188,9 @@ namespace CharacterCreator.ConsoleHost
                 switch (option)
                 {
                     case 'D': return "Dwarf ";
-                    case 'E':return "Elf";
-                    case 'G':return "Gnome ";
-                    case 'T':return "Half Elf";
+                    case 'E': return "Elf";
+                    case 'G': return "Gnome ";
+                    case 'T': return "Half Elf";
                     case 'H': return "Human ";
                     default: DisplayError("Unknown Command"); break;
                 };
@@ -161,6 +201,7 @@ namespace CharacterCreator.ConsoleHost
         /// <summary> Display the character race menu</summary>
         private static char DisplayRaceMenu ()
         {
+
             Console.WriteLine("Choose your character's race");
             Console.WriteLine("-------------");
             Console.WriteLine("D) Dwarf");
@@ -191,6 +232,115 @@ namespace CharacterCreator.ConsoleHost
             } while (true);
         }
 
+
+
+        /// <summary> Display the character profession menu</summary>
+        private static void DisplayEditMenu ()
+        {
+
+            Console.WriteLine("What would you like to edit");
+            Console.WriteLine("-------------");
+            Console.WriteLine("A) Name ");
+            Console.WriteLine("B) Profession");
+            Console.WriteLine("C) Race");
+            Console.WriteLine("--------Attributes-------- ");
+            Console.WriteLine("D) Strength");
+            Console.WriteLine("E) Intelligence ");
+            Console.WriteLine("F) Agility ");
+            Console.WriteLine("G) Constitution ");
+            Console.WriteLine("H) Charisma ");
+            Console.WriteLine("J) Biography");
+            Console.WriteLine("Q) Quit");
+            string option = Console.ReadLine();
+            do
+            {
+                switch (option)
+                {
+                    case "A":
+                    case "a":
+                    do
+                    {
+
+                        Console.Write("Enter Character Name: ");
+                        character.Name = Console.ReadLine();
+
+                    } while (!character.Validate(out var error));
+                    break;
+
+                    case "B":
+                    case "b":
+                    Console.Write("Choose your profession: ");
+                    character.profession=professionOption();
+
+
+                    break;
+                    case "C":
+                    case "c":
+                    Console.Write("Choose your race: ");
+                    character.race=raceOption();
+
+
+                    break;
+                    case "D":
+                    case "d":
+                    Console.Write("Strength: ");
+                    character.Strength=ReadInt32();
+                    
+                    break;
+
+                    case "E":
+                    case "e":
+                    Console.Write("Intelligence: ");
+                    character.Intelligence=ReadInt32();
+                    
+
+                    break;
+
+                    case "F":
+                    case "f":
+                    Console.Write("Agility: ");
+                    character.Agility=ReadInt32();
+
+                    break;
+                    case "G":
+                    case "g":
+                    Console.Write("Constitution: ");
+                    character.Constitution=ReadInt32();
+
+                    break;
+                    case "H":
+                    case "h":
+                    Console.Write("Charisma:");
+                    character.Charisma=ReadInt32();
+
+                   break;
+
+                    case "J":
+                    case "j":
+                    Console.Write("Enter an optional Biography: ");
+                    character.Biography = Console.ReadLine();
+
+                    break;
+
+                    case "Q":
+                    case "q":
+                    DisplayMainMenu();
+                    break;
+                    default: DisplayError("Unknown Command"); break;
+                };
+                ViewCharacter();
+                DisplayEditMenu();
+            } while (option != "A" && option != "a" && option != "B" && option != "b" && option != "C"  && option != "c" 
+            && option!="D"  && option != "d" && option!="E" && option != "e"&& option!="F" && option != "f"&& option!="G"  && option != "g"&& option!="H" && option != "h"&& option!="I" && option != "i");
+        }
+
+
+          
+        
+
+
+
+
         static int ReadInt32 ( )
         {
             int minimumValue = 1;
@@ -207,7 +357,7 @@ namespace CharacterCreator.ConsoleHost
                     if (result >= minimumValue && result <= maxmumValue)
                         return result;
                     else
-                        DisplayError("Value must be between" + minimumValue + " & "+ maxmumValue);
+                        DisplayError("Value must be between " + minimumValue + " & "+ maxmumValue);
                   
                 } else
                     DisplayError("Value must be numeric");
