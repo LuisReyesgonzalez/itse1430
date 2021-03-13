@@ -9,7 +9,7 @@ namespace CharacterCreator
             //Initialize the fields that cannot be initialized using the field initializer syntax
             _biography = _name;
         }
-        //Allows you to create the instance and set a common property all at once
+      
         public Character ( string Name,string Race,string Profession, int Strength, int Intelligence, int Agility, int Constitution, int Charisma )
         {
             _name=Name;
@@ -24,9 +24,8 @@ namespace CharacterCreator
         }
 
 
-        /// <summary>Validates the movie data is correct.</summary>
-        /// <param name="error">determines if movie has beeen restored</param>
-        /// <returns>True if movie is valid</returns>
+        /// <summary>Validates nane for the character is correct.</summary>
+        
         public bool Validate ( out string error )
         {
             //Name is required
@@ -43,9 +42,8 @@ namespace CharacterCreator
 
         public string Name
         {
-            //getter - string Name()
             get {
-                //Return Name if not null or empty string otherwise
+                
                 return _name ??"";
             }
             set { _name = value?.Trim() ?? ""; }
@@ -71,7 +69,6 @@ namespace CharacterCreator
         {
             //getter - string Name()
             get {
-                //Return Name if not null or empty string otherwise
                 return _profession ??"";
             }
             set { _profession = value?.Trim() ?? ""; }
@@ -82,7 +79,6 @@ namespace CharacterCreator
         {
             //getter - string Name()
             get {
-                //Return Name if not null or empty string otherwise
                 return _race ??"";
             }
             set { _race = value?.Trim() ?? ""; }

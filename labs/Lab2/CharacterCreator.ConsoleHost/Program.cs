@@ -234,7 +234,7 @@ namespace CharacterCreator.ConsoleHost
 
 
 
-        /// <summary> Display the character profession menu</summary>
+        /// <summary> Display the character edit menu</summary>
         private static void DisplayEditMenu ()
         {
 
@@ -340,7 +340,7 @@ namespace CharacterCreator.ConsoleHost
 
 
 
-
+        /// <summary> Validation for numbers being entered</summary>
         static int ReadInt32 ( )
         {
             int minimumValue = 1;
