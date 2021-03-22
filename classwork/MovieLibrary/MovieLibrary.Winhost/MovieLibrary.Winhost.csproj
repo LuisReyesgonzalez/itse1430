@@ -10,6 +10,16 @@
 
       <UseWindowsForms>true</UseWindowsForms>
 
+      <Company>Your Name</Company>
+
+      <Product>Movie Library</Product>
+
+   </PropertyGroup>
+
+
+
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+     <WarningLevel>5</WarningLevel>
    </PropertyGroup>
 
 
