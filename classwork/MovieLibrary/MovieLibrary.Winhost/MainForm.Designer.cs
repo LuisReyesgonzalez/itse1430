@@ -54,7 +54,6 @@ namespace MovieLibrary.Winhost
             this.mainMenu.Size = new System.Drawing.Size(800, 28);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "menuStrip1";
-            this.mainMenu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mainMenu_ItemClicked);
             // 
             // toolStripMenuItem1
             // 
@@ -69,6 +68,7 @@ namespace MovieLibrary.Winhost
             this.miFileExit.Name = "miFileExit";
             this.miFileExit.Size = new System.Drawing.Size(116, 26);
             this.miFileExit.Text = "E&xit";
+            this.miFileExit.Click += new System.EventHandler(this.OnFileExit);
             // 
             // toolStripMenuItem2
             // 
@@ -87,6 +87,7 @@ namespace MovieLibrary.Winhost
             this.miMoviesAdd.ShortcutKeys = System.Windows.Forms.Keys.Insert;
             this.miMoviesAdd.Size = new System.Drawing.Size(178, 26);
             this.miMoviesAdd.Text = "Add";
+            this.miMoviesAdd.Click += new System.EventHandler(this.OnMovieAdd);
             // 
             // miMovieEdit
             // 
@@ -94,6 +95,7 @@ namespace MovieLibrary.Winhost
             this.miMovieEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Insert)));
             this.miMovieEdit.Size = new System.Drawing.Size(178, 26);
             this.miMovieEdit.Text = "Edit";
+            this.miMovieEdit.Click += new System.EventHandler(this.OnMovieEdit);
             // 
             // toolStripSeparator1
             // 
@@ -106,7 +108,7 @@ namespace MovieLibrary.Winhost
             this.miMovieDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.miMovieDelete.Size = new System.Drawing.Size(178, 26);
             this.miMovieDelete.Text = "Delete";
-            this.miMovieDelete.Click += new System.EventHandler(this.OnFileExit);
+            this.miMovieDelete.Click += new System.EventHandler(this.OnMovieDelete);
             // 
             // toolStripMenuItem3
             // 
@@ -122,7 +124,7 @@ namespace MovieLibrary.Winhost
             this.miHelpAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.miHelpAbout.Size = new System.Drawing.Size(157, 26);
             this.miHelpAbout.Text = "About";
-          
+            this.miHelpAbout.Click += new System.EventHandler(this.OnHelpAbout);
             // 
             // MainForm
             // 

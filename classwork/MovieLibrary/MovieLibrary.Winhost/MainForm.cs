@@ -15,12 +15,7 @@ namespace MovieLibrary.Winhost
 
         }
 
-        private void mainMenu_ItemClicked ( object sender, ToolStripItemClickedEventArgs e )
-        {
-
-        }
-
-        private void OnHelpAbout ( object sender, EventArgs e )
+    private void OnHelpAbout ( object sender, EventArgs e )
         {
             // MessageBox.Show("Help - About");
             var form = new AboutBox();
@@ -28,11 +23,8 @@ namespace MovieLibrary.Winhost
             //show the form modally
             form.ShowDialog();
             //form.Show(); //modeless
-
-
-
         }
-
+        
         private void OnFileExit ( object sender, EventArgs e )
         {
             //display a conformation and quit if yes
@@ -41,7 +33,39 @@ namespace MovieLibrary.Winhost
                 return;
             //Close the form
             Close();
-
         }
+
+        private void OnMovieAdd ( object sender, EventArgs e )
+        {
+            var form = new MovieDetailForm();
+            if (form.ShowDialog(this)==DialogResult.Cancel)
+                return;
+
+
+            //TODO: "Save" the movie
+            //_movie=;
+            MessageBox.Show("saved the movie");
+        }
+
+        private void OnMovieDelete ( object sender, EventArgs e )
+        {
+            //If a Movie exist then display conformation then delete
+            if (_movie==null)
+                return;
+
+            var result =   MessageBox.Show(this, $"Are you sure want to delete'{_movie.Title}'?" , "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+                return;
+
+            //TODO: delete
+            MessageBox.Show("Deleted the movie");
+            _movie=null;
+        }
+
+        private void OnMovieEdit ( object sender, EventArgs e )
+        {
+            //TODO: IF the movie exist then edit movie and update info
+        }
+        private Movie _movie;
     }
 }
