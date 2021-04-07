@@ -130,7 +130,7 @@ namespace MovieLibrary.Winhost
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(136, 97);
+            this.txtDescription.Location = new System.Drawing.Point(135, 97);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(125, 27);
             this.txtDescription.TabIndex = 10;

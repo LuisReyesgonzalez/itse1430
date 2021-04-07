@@ -96,6 +96,11 @@ namespace MovieLibrary
             //set { }
         }
 
+        public override string ToString ()
+        {
+            return Title;
+        }
+
         /// <summary>Validates the movie data is correct.</summary>
         /// <param name="error">determines if movie has beeen restored</param>
         /// <returns>True if movie is valid</returns>
