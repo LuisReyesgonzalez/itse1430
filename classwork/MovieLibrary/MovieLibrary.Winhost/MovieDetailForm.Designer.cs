@@ -29,6 +29,7 @@ namespace MovieLibrary.Winhost
         /// </summary>
         private void InitializeComponent ()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,12 +43,14 @@ namespace MovieLibrary.Winhost
             this.txtRunLength = new System.Windows.Forms.TextBox();
             this.txtReleaseYear = new System.Windows.Forms.TextBox();
             this.cbRating = new System.Windows.Forms.ComboBox();
+            this._errors = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 49);
+            this.label1.Location = new System.Drawing.Point(66, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 20);
             this.label1.TabIndex = 0;
@@ -56,7 +59,7 @@ namespace MovieLibrary.Winhost
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 104);
+            this.label2.Location = new System.Drawing.Point(19, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(85, 20);
             this.label2.TabIndex = 1;
@@ -64,8 +67,9 @@ namespace MovieLibrary.Winhost
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 166);
+            this.label3.Location = new System.Drawing.Point(52, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 20);
             this.label3.TabIndex = 2;
@@ -73,8 +77,9 @@ namespace MovieLibrary.Winhost
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 212);
+            this.label4.Location = new System.Drawing.Point(9, 141);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 20);
             this.label4.TabIndex = 3;
@@ -82,8 +87,9 @@ namespace MovieLibrary.Winhost
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(35, 267);
+            this.label5.Location = new System.Drawing.Point(18, 174);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 20);
             this.label5.TabIndex = 4;
@@ -91,66 +97,82 @@ namespace MovieLibrary.Winhost
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.CausesValidation = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(682, 384);
+            this.btnCancel.Location = new System.Drawing.Point(252, 267);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 29);
-            this.btnCancel.TabIndex = 6;
+            this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.OnCancel);
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnSave.Location = new System.Drawing.Point(432, 384);
+            this.btnSave.Location = new System.Drawing.Point(152, 267);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 29);
-            this.btnSave.TabIndex = 7;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.OnSave);
             // 
             // ckIsClassic
             // 
+            this.ckIsClassic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ckIsClassic.AutoSize = true;
-            this.ckIsClassic.Location = new System.Drawing.Point(136, 337);
+            this.ckIsClassic.Location = new System.Drawing.Point(107, 214);
             this.ckIsClassic.Name = "ckIsClassic";
             this.ckIsClassic.Size = new System.Drawing.Size(96, 24);
-            this.ckIsClassic.TabIndex = 8;
+            this.ckIsClassic.TabIndex = 5;
             this.ckIsClassic.Text = "Is Classic?";
             this.ckIsClassic.UseVisualStyleBackColor = true;
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(136, 49);
+            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTitle.Location = new System.Drawing.Point(110, 24);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(125, 27);
-            this.txtTitle.TabIndex = 9;
+            this.txtTitle.Size = new System.Drawing.Size(221, 27);
+            this.txtTitle.TabIndex = 0;
+            this.txtTitle.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingTitle);
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(135, 97);
+            this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescription.Location = new System.Drawing.Point(110, 60);
+            this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(125, 27);
-            this.txtDescription.TabIndex = 10;
+            this.txtDescription.Size = new System.Drawing.Size(221, 38);
+            this.txtDescription.TabIndex = 1;
             // 
             // txtRunLength
             // 
-            this.txtRunLength.Location = new System.Drawing.Point(136, 260);
+            this.txtRunLength.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtRunLength.Location = new System.Drawing.Point(107, 171);
             this.txtRunLength.Name = "txtRunLength";
-            this.txtRunLength.Size = new System.Drawing.Size(125, 27);
-            this.txtRunLength.TabIndex = 11;
+            this.txtRunLength.Size = new System.Drawing.Size(55, 27);
+            this.txtRunLength.TabIndex = 4;
+            this.txtRunLength.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingRunLength);
             // 
             // txtReleaseYear
             // 
-            this.txtReleaseYear.Location = new System.Drawing.Point(136, 212);
+            this.txtReleaseYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtReleaseYear.Location = new System.Drawing.Point(107, 138);
             this.txtReleaseYear.Name = "txtReleaseYear";
-            this.txtReleaseYear.Size = new System.Drawing.Size(125, 27);
-            this.txtReleaseYear.TabIndex = 12;
+            this.txtReleaseYear.Size = new System.Drawing.Size(55, 27);
+            this.txtReleaseYear.TabIndex = 3;
+            this.txtReleaseYear.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingReleaseYear);
             // 
             // cbRating
             // 
+            this.cbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbRating.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRating.FormattingEnabled = true;
             this.cbRating.Items.AddRange(new object[] {
@@ -158,17 +180,24 @@ namespace MovieLibrary.Winhost
             "PG",
             "PG-13",
             "R"});
-            this.cbRating.Location = new System.Drawing.Point(136, 158);
+            this.cbRating.Location = new System.Drawing.Point(110, 104);
             this.cbRating.Name = "cbRating";
-            this.cbRating.Size = new System.Drawing.Size(125, 28);
-            this.cbRating.TabIndex = 13;
+            this.cbRating.Size = new System.Drawing.Size(93, 28);
+            this.cbRating.TabIndex = 2;
+            this.cbRating.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidatingRating);
+            // 
+            // _errors
+            // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errors.ContainerControl = this;
             // 
             // MovieDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(354, 314);
             this.Controls.Add(this.cbRating);
             this.Controls.Add(this.txtReleaseYear);
             this.Controls.Add(this.txtRunLength);
@@ -182,8 +211,11 @@ namespace MovieLibrary.Winhost
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(372, 361);
             this.Name = "MovieDetailForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Movie Details";
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,5 +236,6 @@ namespace MovieLibrary.Winhost
         private System.Windows.Forms.TextBox txtRunLength;
         private System.Windows.Forms.TextBox txtReleaseYear;
         private System.Windows.Forms.ComboBox cbRating;
+        private System.Windows.Forms.ErrorProvider _errors;
     }
 }
