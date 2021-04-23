@@ -22,12 +22,16 @@ namespace CharacterCreator
             _charisma=Charisma;
 
         }
-
+        public override string ToString ()
+        {
+            return base.ToString();
+        }
 
         /// <summary>Validates nane for the character is correct.</summary>
-        
+
         public bool Validate ( out string error )
         {
+            //major issue here
             //Name is required
             if (String.IsNullOrEmpty(Name))
             {
@@ -36,6 +40,8 @@ namespace CharacterCreator
             };
             error = "";
             return true;
+
+
         }
 
 

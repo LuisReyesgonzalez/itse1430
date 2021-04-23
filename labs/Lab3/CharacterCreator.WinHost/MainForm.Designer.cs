@@ -39,6 +39,7 @@ namespace CharacterCreator.WinHost
             this.miCharacterDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.miHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.lstCharacter = new System.Windows.Forms.ListBox();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,27 +87,30 @@ namespace CharacterCreator.WinHost
             // 
             this.miCharacterAdd.Name = "miCharacterAdd";
             this.miCharacterAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.miCharacterAdd.Size = new System.Drawing.Size(175, 26);
-            this.miCharacterAdd.Text = "&New";
+            this.miCharacterAdd.Size = new System.Drawing.Size(244, 26);
+            this.miCharacterAdd.Text = "&Character\\New";
+            this.miCharacterAdd.Click += new System.EventHandler(this.OnCharacterAdd);
             // 
             // miCharacterEdit
             // 
             this.miCharacterEdit.Name = "miCharacterEdit";
             this.miCharacterEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
-            this.miCharacterEdit.Size = new System.Drawing.Size(175, 26);
+            this.miCharacterEdit.Size = new System.Drawing.Size(244, 26);
             this.miCharacterEdit.Text = "Edit";
+            this.miCharacterEdit.Click += new System.EventHandler(this.OnCharacterEdit);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(241, 6);
             // 
             // miCharacterDelete
             // 
             this.miCharacterDelete.Name = "miCharacterDelete";
             this.miCharacterDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.miCharacterDelete.Size = new System.Drawing.Size(175, 26);
+            this.miCharacterDelete.Size = new System.Drawing.Size(244, 26);
             this.miCharacterDelete.Text = "Delete";
+            this.miCharacterDelete.Click += new System.EventHandler(this.OnCharacterDelete);
             // 
             // toolStripMenuItem3
             // 
@@ -123,19 +127,30 @@ namespace CharacterCreator.WinHost
             this.miHelpAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.miHelpAbout.Size = new System.Drawing.Size(157, 26);
             this.miHelpAbout.Text = "About";
-            this.miHelpAbout.Click += new System.EventHandler(this.miHelpAbout_Click);
+            this.miHelpAbout.Click += new System.EventHandler(this.OnHelpAbout);
+            // 
+            // lstCharacter
+            // 
+            this.lstCharacter.FormattingEnabled = true;
+            this.lstCharacter.ItemHeight = 20;
+            this.lstCharacter.Location = new System.Drawing.Point(12, 31);
+            this.lstCharacter.Name = "lstCharacter";
+            this.lstCharacter.Size = new System.Drawing.Size(258, 364);
+            this.lstCharacter.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 403);
+            this.Controls.Add(this.lstCharacter);
             this.Controls.Add(this.mainMenu);
             this.MainMenuStrip = this.mainMenu;
             this.MinimumSize = new System.Drawing.Size(260, 420);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Character Creator";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -155,6 +170,7 @@ namespace CharacterCreator.WinHost
         private System.Windows.Forms.ToolStripMenuItem miCharacterDelete;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem miHelpAbout;
+        private System.Windows.Forms.ListBox lstCharacter;
     }
 }
 
