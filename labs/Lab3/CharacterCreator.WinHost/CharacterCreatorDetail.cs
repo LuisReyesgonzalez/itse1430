@@ -28,8 +28,16 @@ namespace CharacterCreator.WinHost
 
         private void OnSave ( object sender, EventArgs e )
         {
+            //Validing UI
+            if(!ValidateChildren())
+            {
+                DialogResult=DialogResult.None;
+                return;
+            };
+
+            //creating Character
             var character = SaveCharacter();
-            if(character.Validate(out var error))
+            if(!character.Validate(out var error))
                 {
                 MessageBox.Show(error, "Save", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult=DialogResult.None;
@@ -84,5 +92,117 @@ namespace CharacterCreator.WinHost
 
                 return character;
         }
+
+        //validating for Name
+
+
+        
+
+        private void OnValidatingName ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                _errors.SetError(control, "Name is required");
+                e.Cancel=true;
+            }else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingProfession ( object sender, CancelEventArgs e )
+        {
+
+        }
+
+        private void OnValidatingRace ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+            var race = control.SelectedItem as string;
+            if (String.IsNullOrEmpty(race))
+            {
+                _errors.SetError(control, "race is required");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingStrength ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var value = GetInt32(control);
+            if(value<0)
+           
+            {
+                _errors.SetError(control, "Strength must be greater than 0");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingIntelligence ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var value = GetInt32(control);
+            if (value<0)
+            {
+                _errors.SetError(control, "Intelligence must be greater than 0");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingAgility ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var value = GetInt32(control);
+            if (value<0)
+            {
+                _errors.SetError(control, "Agility must be greater than 0");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingConstitution ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var value = GetInt32(control);
+            if (value<0)
+            {
+                _errors.SetError(control, "Constitution must be greater than 0");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+        private void OnValidatingcharisma ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+            var value = GetInt32(control);
+            if (value<0)
+            {
+                _errors.SetError(control, "Charisma must be greater than 0");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
+        }
+
+
+
+
     }
 }

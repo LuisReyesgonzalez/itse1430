@@ -40,15 +40,17 @@ namespace CharacterCreator.WinHost
                 return;
 
             _character=form.Character;
+            UpdateUI();
 
         }
 
         private void OnCharacterDelete ( object sender, EventArgs e )
         {
+            var character = GetSelectedCharacter();
             //Charcter will delete if it exist
-            if (_character==null) 
+            if (character==null) 
             return;
-            var result = MessageBox.Show(this, $"Are you sure that you want to delete'{_character.Name}'?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show(this, $"Are you sure that you want to delete'{character.Name}'?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result!=DialogResult.Yes)
                 return;
 
@@ -59,11 +61,12 @@ namespace CharacterCreator.WinHost
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
             //reutrn if null
-            if (_character==null)
+            var character = GetSelectedCharacter();
+            if (character==null)
                 return;
             
             var form = new CharacterCreatorDetail();
-            form.Character=_character;
+            form.Character= character;
 
             if (form.ShowDialog(this)== DialogResult.Cancel)
                 return;
@@ -72,15 +75,26 @@ namespace CharacterCreator.WinHost
             UpdateUI();
         }
         //Updates th3e list ong the UI
-        private void UpdateUI()
+       
+        private Character GetSelectedCharacter ()
         {
-            var count = (_character!=null)? 1 : 0 ;
-            Character[] characters = new Character[count];
-            if (_character!=null)
-            characters[0]=_character;
+            return lstCharacter.SelectedItem as Character;
+            
+        }
+        private void UpdateUI ()
+        {
 
-            lstCharacter.DataSource=characters;
+            
+            var count = (_character != null) ? 1 : 0;
+
+            Character[] characters = new Character[count];
+                    if (_character != null)
+                characters[0]=_character;
+            
+            lstCharacter.DataSource = characters;
             lstCharacter.DisplayMember="Name";
+           
+           
         }
         private Character _character;
     }

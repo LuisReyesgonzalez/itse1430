@@ -24,7 +24,7 @@ namespace CharacterCreator
         }
         public override string ToString ()
         {
-            return base.ToString();
+            return Name;
         }
 
         /// <summary>Validates nane for the character is correct.</summary>
@@ -36,6 +36,35 @@ namespace CharacterCreator
             if (String.IsNullOrEmpty(Name))
             {
                 error = "Name is required. ";
+                return false;
+            };
+            if (Strength<=0)
+            {
+                error = "Strength must be greater than 0.";
+
+                return false;
+            };
+            if (Intelligence<=0)
+            {
+                error = "Intelligence must be greater than 0.";
+
+                return false;
+            }; if (Agility<=0)
+            {
+                error = "Agility must be greater than 0.";
+
+                return false;
+            };
+            if (Constitution<=0)
+            {
+                error = "Constitution must be greater than 0.";
+
+                return false;
+            };
+            if (Charisma<=0)
+            {
+                error = "Charisma must be greater than 0.";
+
                 return false;
             };
             error = "";

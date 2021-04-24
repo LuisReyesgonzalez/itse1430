@@ -131,11 +131,12 @@ namespace CharacterCreator.WinHost
             // 
             // lstCharacter
             // 
+            this.lstCharacter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstCharacter.FormattingEnabled = true;
             this.lstCharacter.ItemHeight = 20;
-            this.lstCharacter.Location = new System.Drawing.Point(12, 31);
+            this.lstCharacter.Location = new System.Drawing.Point(0, 28);
             this.lstCharacter.Name = "lstCharacter";
-            this.lstCharacter.Size = new System.Drawing.Size(258, 364);
+            this.lstCharacter.Size = new System.Drawing.Size(282, 375);
             this.lstCharacter.TabIndex = 1;
             // 
             // MainForm
