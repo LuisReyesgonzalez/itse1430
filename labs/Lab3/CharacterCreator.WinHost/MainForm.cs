@@ -1,4 +1,7 @@
-﻿using System;
+﻿//Luis Reyes
+//ITSE 1430
+//Lab 3: Character Creator
+using System;
 using System.Windows.Forms;
 
 namespace CharacterCreator.WinHost
