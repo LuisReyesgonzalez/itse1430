@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Company>Luis Reyes    ITSE 1430</Company>
+    <Product>Character Creator</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CharacterCreator\CharacterCreator.csproj" />
+  </ItemGroup>
+
+</Project>
