@@ -1,15 +1,13 @@
-﻿//Luis Reyes
-//ITSE1430
-//Lab 4
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CharacterCreator
 {
-    interface Interface1
+    public interface ICharacterRoster
     {
+        Character Add ( Character character, out string error );
+        void Delete ( int id, out string error );
+        Character Get ( int id, out string error );
+        IEnumerable<Character> GetAll ();
+        void Update ( int id, Character character, out string error );
     }
 }

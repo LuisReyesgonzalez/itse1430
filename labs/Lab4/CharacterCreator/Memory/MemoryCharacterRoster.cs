@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CharacterCreator
 {
-  public  class MemoryCharacterRoster
+    public class MemoryCharacterRoster : ICharacterRoster
     {
-        public Character Add (Character character, out string error)
+        public Character Add ( Character character, out string error )
         {
             //Validation
             //Check for null and valid Character
@@ -21,10 +21,10 @@ namespace CharacterCreator
                 return null;
             //not needed
             var existing = FindByName(character.Name);
-            if (existing !=null )
+            if (existing !=null)
             {
                 error="Character name must be unique";
-                    return null;
+                return null;
             };
             //add movie
             character.Id=++_id;
@@ -32,10 +32,10 @@ namespace CharacterCreator
 
             return character;
         }
-       public void Delete(int id,out string error)
+        public void Delete ( int id, out string error )
         {
             //Validation
-            if(id <= 0)
+            if (id <= 0)
             {
                 error="Id must be greater than zero.";
                 return;
@@ -47,7 +47,7 @@ namespace CharacterCreator
             if (existing !=null)
                 _characters.Remove(existing);
         }
-        public Character Get(int id ,out string error)
+        public Character Get ( int id, out string error )
         {
             //Validation
             if (id <= 0)
@@ -63,17 +63,19 @@ namespace CharacterCreator
                 return null;
             return CloneCharacter(existing);
         }
-     
-        public Character[] GetAll ()
+
+        // public Character[] GetAll ()
+        public IEnumerable<Character> GetAll ()
+
         {
             var items = new Character[_characters.Count];
-        
+
             int index = 0;
             foreach (var item in _characters)
                 items[index++]=CloneCharacter(item);
             return items;
         }
-        public void Update (int id, Character character, out string error )
+        public void Update ( int id, Character character, out string error )
         {
             //Validation
             //Check for null and valid Character
@@ -133,7 +135,7 @@ namespace CharacterCreator
             target.Biography=source.Biography;
         }
 
-        private Character FindById ( int id)
+        private Character FindById ( int id )
         {
             foreach (var item in _characters)
             {
@@ -145,7 +147,7 @@ namespace CharacterCreator
         }
         private Character FindByName ( string name )
         {
-            foreach(var item in _characters)
+            foreach (var item in _characters)
             {
                 if (String.Compare(item.Name, name, true)==0)
                     return item;

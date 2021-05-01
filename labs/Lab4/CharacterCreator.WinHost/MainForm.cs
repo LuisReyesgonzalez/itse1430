@@ -44,7 +44,7 @@ namespace CharacterCreator.WinHost
                     return;
 
                 //Save the Cahracter
-                _dataBase.Add(form.Character, out var error);
+                _roster.Add(form.Character, out var error);
                 if (String.IsNullOrEmpty(error))
                     break;
                     DisplayError("Add Failed", error);
@@ -67,7 +67,7 @@ namespace CharacterCreator.WinHost
             var result = MessageBox.Show(this, $"Are you sure that you want to delete'{character.Name}'?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result!=DialogResult.Yes)
                 return;
-            _dataBase.Delete(character.Id,out var error);
+            _roster.Delete(character.Id,out var error);
           
             UpdateUI();
         }
@@ -88,7 +88,7 @@ namespace CharacterCreator.WinHost
                     return;
 
                 //Save the Character
-                _dataBase.Update(character.Id,form.Character, out var error);
+                _roster.Update(character.Id,form.Character, out var error);
                 if (String.IsNullOrEmpty(error))
                     break;
                 DisplayError("Update Failed", error);
@@ -105,10 +105,10 @@ namespace CharacterCreator.WinHost
         }
         private void UpdateUI ()
         {
-            var characters = _dataBase.GetAll();
+            var characters = _roster.GetAll();
             lstCharacter.DataSource = characters;
             lstCharacter.DisplayMember="Name";
         }
-        private readonly MemoryCharacterRoster _dataBase = new MemoryCharacterRoster(); 
+        private readonly ICharacterRoster _roster = new MemoryCharacterRoster(); 
     }
 }
