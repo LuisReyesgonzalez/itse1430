@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Luis Reyes
+//ITSE1430
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
