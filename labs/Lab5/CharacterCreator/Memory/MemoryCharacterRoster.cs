@@ -20,8 +20,16 @@ namespace CharacterCreator
                 error="Character is null";
                 return null;
             };
-            var context = new ValidationContext(character);
+            //This is where I'm having the issue with. 
+            /// var context = new ValidationContext(character);
+            /// var errors = new List<ValidationResult>();
+            //Severity	Code	Description	Project	File	Line	Suppression State
+           // the first  error is The type or namespace name 'ValidationContext' could not be found ( are you missing a using directive or an assembly reference?)	
+
+
+                    var context = new ValidationContext(character);
             var errors = new List<ValidationResult>();
+
             if (character.Validate(out error))
                 return null;
             //not needed
