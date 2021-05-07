@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿//Luis Reyes
+//ITSE1430
+//Character Collections
+using System.Collections.Generic;
 
 namespace CharacterCreator
 {

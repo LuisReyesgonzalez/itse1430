@@ -23,20 +23,17 @@ namespace CharacterCreator
         {
             var errors = new List<ValidationResult>();
             if (String.IsNullOrEmpty(Name))
-                errors.Add(new ValidationResult( "Name is required. "));
-         
+                yield return new ValidationResult("Name is required. ");
             if (Strength<=0)
-                errors.Add(new ValidationResult("Strength must be greater than 0."));
+                yield return new ValidationResult("Strength must be greater than 0.");
             if (Intelligence<=0)
-                errors.Add(new ValidationResult("Intelligence must be greater than 0."));
-             if (Agility<=0)
-                errors.Add(new ValidationResult("Agility must be greater than 0."));
+                yield return new ValidationResult("Intelligence must be greater than 0.");
+            if (Agility<=0)
+                yield return new ValidationResult("Agility must be greater than 0.");
             if (Constitution<=0)
-                errors.Add(new ValidationResult("Constitution must be greater than 0."));
+            yield return new ValidationResult("Constitution must be greater than 0.");
             if (Charisma<=0)
-                errors.Add(new ValidationResult("Charisma must be greater than 0."));
-            return errors;
-
+                      yield return new ValidationResult("Charisma must be greater than 0.");
         }
 
         public string Name

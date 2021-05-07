@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CharacterCreator
 {
-    public class MemoryCharacterRoster : ICharacterRoster 
+    public class MemoryCharacterRoster : ICharacterRoster
     {
         public Character Add ( Character character, out string error )
         {
@@ -29,13 +29,13 @@ namespace CharacterCreator
 
 
 
-            var errors = new ObjectValidator().TryValidate(character);
-            if(errors.Count>0)
-              {
+           var errors = new ObjectValidator().TryValidate(character);
+            if (errors.Count>0)
+            {
                 error=errors[0].ErrorMessage;
                 return null;
             }
-         
+
             var existing = FindByName(character.Name);
             if (existing !=null)
             {
@@ -87,7 +87,7 @@ namespace CharacterCreator
             var items = new Character[_characters.Count];
             int index = 0;
             foreach (var item in _characters)
-              yield  return CloneCharacter(item);
+                yield return CloneCharacter(item);
         }
         public void Update ( int id, Character character, out string error )
         {
@@ -102,7 +102,7 @@ namespace CharacterCreator
             if (errors.Count>0)
             {
                 error=errors[0].ErrorMessage;
-                return ;
+                return;
             }
             //id Validation
             if (id <= 0)
