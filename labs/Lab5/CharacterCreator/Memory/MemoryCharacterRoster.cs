@@ -25,15 +25,17 @@ namespace CharacterCreator
             /// var context = new ValidationContext(character);
             /// var errors = new List<ValidationResult>();
             //Severity	Code	Description	Project	File	Line	Suppression State
-           // the first  error is The type or namespace name 'ValidationContext' could not be found ( are you missing a using directive or an assembly reference?)	
+            // the first  error is The type or namespace name 'ValidationContext' could not be found ( are you missing a using directive or an assembly reference?)	
 
 
-                    var context = new ValidationContext(character);
-            var errors = new List<ValidationResult>();
 
-            if (character.Validate(out error))
+            var errors = new ObjectValidator().TryValidate(character);
+            if(errors.Count>0)
+              {
+                error=errors[0].ErrorMessage;
                 return null;
-            //not needed
+            }
+         
             var existing = FindByName(character.Name);
             if (existing !=null)
             {
@@ -43,7 +45,7 @@ namespace CharacterCreator
             //add movie
             character.Id=++_id;
             _characters.Add(CloneCharacter(character));
-
+            error=null;
             return character;
         }
         public void Delete ( int id, out string error )
@@ -98,8 +100,12 @@ namespace CharacterCreator
                 error="Character is null";
                 return;
             };
-            if (!character.Validate(out error))
-                return;
+            var errors = new ObjectValidator().TryValidate(character);
+            if (errors.Count>0)
+            {
+                error=errors[0].ErrorMessage;
+                return ;
+            }
             //id Validation
             if (id <= 0)
             {
