@@ -85,11 +85,9 @@ namespace CharacterCreator
 
         {
             var items = new Character[_characters.Count];
-
             int index = 0;
             foreach (var item in _characters)
-                items[index++]=CloneCharacter(item);
-            return items;
+              yield  return CloneCharacter(item);
         }
         public void Update ( int id, Character character, out string error )
         {
