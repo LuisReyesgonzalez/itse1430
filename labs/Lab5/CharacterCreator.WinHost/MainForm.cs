@@ -1,6 +1,6 @@
 ﻿//Luis Reyes
-//ITSE 1430
-//Lab 4: Character Creator
+//ITSE1430
+//Character Creator SQL Database
 using System;
 using System.Windows.Forms;
 
@@ -37,20 +37,21 @@ namespace CharacterCreator.WinHost
         private void OnCharacterAdd ( object sender, EventArgs e )
         {
             var form = new CharacterCreatorDetail();
-
             do
             {
                 if (form.ShowDialog(this)== DialogResult.Cancel)
                     return;
-
-                //Save the Cahracter
-                _roster.Add(form.Character, out var error);
-                if (String.IsNullOrEmpty(error))
-                    break;
-                    DisplayError("Add Failed", error);
+                try
+                {//Save the Cahracter
+                    _roster.Add(form.Character);
+                        break;
+                } catch(Exception ex)
+                {
+                    DisplayError("Add Failed", ex.Message);
+                };
+                   
             }while (true) ;
             UpdateUI();
-
         }
         private void DisplayError (string name , string message)
         {
@@ -67,8 +68,13 @@ namespace CharacterCreator.WinHost
             var result = MessageBox.Show(this, $"Are you sure that you want to delete'{character.Name}'?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result!=DialogResult.Yes)
                 return;
-            _roster.Delete(character.Id,out var error);
-          
+            try
+            {
+                _roster.Delete(character.Id);
+            }catch(Exception ex)
+            {
+                DisplayError("Delete Failed", ex.Message);
+            };
             UpdateUI();
         }
 
@@ -86,12 +92,15 @@ namespace CharacterCreator.WinHost
             {
                 if (form.ShowDialog(this)== DialogResult.Cancel)
                     return;
-
-                //Save the Character
-                _roster.Update(character.Id,form.Character, out var error);
-                if (String.IsNullOrEmpty(error))
+                try
+                {
+                    //Save the Character
+                    _roster.Update(character.Id, form.Character);
                     break;
-                DisplayError("Update Failed", error);
+                } catch (Exception ex)
+                {
+                    DisplayError("Update Failed", ex.Message);
+                };
             } while (true);
 
             UpdateUI();
@@ -105,9 +114,17 @@ namespace CharacterCreator.WinHost
         }
         private void UpdateUI ()
         {
-            var characters = _roster.GetAll();
-            lstCharacter.DataSource = characters;
             lstCharacter.DisplayMember="Name";
+            try
+            {
+                var characters = _roster.GetAll();
+                lstCharacter.DataSource = characters;
+                
+            } catch(Exception e)
+            {
+                DisplayError("Error retreving characters", e.Message);
+                lstCharacter.DataSource=new Character[0];
+            }; 
         }
         private readonly ICharacterRoster _roster = new MemoryCharacterRoster(); 
     }

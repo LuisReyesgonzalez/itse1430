@@ -1,6 +1,6 @@
 ﻿//Luis Reyes
 //ITSE1430
-//Character Collections
+//Character Creator SQL Database
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,67 +12,41 @@ namespace CharacterCreator
 {
     public class MemoryCharacterRoster : ICharacterRoster
     {
-        public Character Add ( Character character, out string error )
+        public Character Add (Character character)
         {
             //Validation
             //Check for null and valid Character
             if (character==null)
-            {
-                error="Character is null";
-                return null;
-            };
-            //This is where I'm having the issue with. 
-            /// var context = new ValidationContext(character);
-            /// var errors = new List<ValidationResult>();
-            //Severity	Code	Description	Project	File	Line	Suppression State
-            // the first  error is The type or namespace name 'ValidationContext' could not be found ( are you missing a using directive or an assembly reference?)	
+                throw new ArgumentNullException(nameof(character));
 
-
-
-           var errors = new ObjectValidator().TryValidate(character);
-            if (errors.Count>0)
-            {
-                error=errors[0].ErrorMessage;
-                return null;
-            }
+            new ObjectValidator().Validate(character);
 
             var existing = FindByName(character.Name);
             if (existing !=null)
             {
-                error="Character name must be unique";
-                return null;
+                throw new InvalidOperationException("Character Name must be unique. ");
             };
             //add movie
             character.Id=++_id;
             _characters.Add(CloneCharacter(character));
-            error=null;
             return character;
         }
-        public void Delete ( int id, out string error )
+        public void Delete ( int id )
         {
             //Validation
             if (id <= 0)
-            {
-                error="Id must be greater than zero.";
-                return;
-            };
-            error=null;
-
+                throw new ArgumentOutOfRangeException(nameof(id),"Id must be greater than 0.");
+          
             //Delete
             var existing = FindById(id);
             if (existing !=null)
                 _characters.Remove(existing);
         }
-        public Character Get ( int id, out string error )
+        public Character Get ( int id )
         {
             //Validation
             if (id <= 0)
-            {
-                error="Id must be greater than zero.";
-                return null;
-            };
-            error=null;
-
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than 0."); ;
             //GET
             var existing = FindById(id);
             if (existing !=null)
@@ -89,45 +63,27 @@ namespace CharacterCreator
             foreach (var item in _characters)
                 yield return CloneCharacter(item);
         }
-        public void Update ( int id, Character character, out string error )
-        {
+        public void Update ( int id, Character character)
+        {   
+            //id Validation
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than 0.");
+           
             //Validation
             //Check for null and valid Character
             if (character==null)
-            {
-                error="Character is null";
-                return;
-            };
-            var errors = new ObjectValidator().TryValidate(character);
-            if (errors.Count>0)
-            {
-                error=errors[0].ErrorMessage;
-                return;
-            }
-            //id Validation
-            if (id <= 0)
-            {
-                error="Id must be greater than zero.";
-                return;
-            };
-            error=null;
-            //name
+                throw new ArgumentNullException(nameof(character));
+            new ObjectValidator().Validate(character);
+
+            //name validation
             var existing = FindByName(character.Name);
-            if (existing !=null&& existing.Id != id)
+            if (existing !=null && existing.Id!=id)
             {
-                error="Character name must be unique";
-                return;
+                throw new InvalidOperationException("Character Name must be unique. ");
             };
+
             //Must be there
-            existing = FindById(id);
-            if (existing ==null)
-            {
-                error="Character must be exist";
-                return;
-            };
-
-            error=null;
-
+            existing = FindById(id) ?? throw new Exception("character does not exist."); 
             //Update the character
             CopyCharacter(existing, character);
         }
