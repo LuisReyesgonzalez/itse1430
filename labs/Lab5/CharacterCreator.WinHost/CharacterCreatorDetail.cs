@@ -1,6 +1,6 @@
 ﻿//Luis Reyes
 //ITSE 1430
-//Lab 3: Character Creator
+//Lab 5: Character SqlSever
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;

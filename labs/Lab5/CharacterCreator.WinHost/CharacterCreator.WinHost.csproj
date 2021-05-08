@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CharacterCreator\CharacterCreator.csproj" />
+    <ProjectReference Include="..\SqlServerCharacterRoster\SqlServerCharacterRoster.csproj" />
   </ItemGroup>
 
 </Project>
