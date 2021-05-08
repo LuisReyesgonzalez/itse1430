@@ -116,7 +116,7 @@ namespace CharacterCreator.WinHost
             var race = control.SelectedItem as string;
             if (String.IsNullOrEmpty(race))
             {
-                _errors.SetError(control, "race is required");
+                _errors.SetError(control, "Profession is required");
                 e.Cancel=true;
             } else
             {
@@ -126,7 +126,16 @@ namespace CharacterCreator.WinHost
 
         private void OnValidatingRace ( object sender, CancelEventArgs e )
         {
-
+            var control = sender as ComboBox;
+            var race = control.SelectedItem as string;
+            if (String.IsNullOrEmpty(race))
+            {
+                _errors.SetError(control, "race is required");
+                e.Cancel=true;
+            } else
+            {
+                _errors.SetError(control, "");
+            };
         }
 
         private void OnValidatingStrength ( object sender, CancelEventArgs e )
